@@ -103,6 +103,66 @@ export type Database = {
         }
         Relationships: []
       }
+      transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          donation_id: string
+          donor_email: string | null
+          donor_id: string | null
+          donor_name: string
+          id: string
+          is_anonymous: boolean | null
+          message: string | null
+          payment_method: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          donation_id: string
+          donor_email?: string | null
+          donor_id?: string | null
+          donor_name: string
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+          payment_method?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          donation_id?: string
+          donor_email?: string | null
+          donor_id?: string | null
+          donor_name?: string
+          id?: string
+          is_anonymous?: boolean | null
+          message?: string | null
+          payment_method?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transactions_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transactions_donor_id_fkey"
+            columns: ["donor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

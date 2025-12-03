@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import DonationForm from "@/components/DonationForm";
 import { 
   Heart, 
   Users, 
@@ -77,6 +79,7 @@ Jazakallahu Khairan Katsira.`,
 
 const DonasiDetail = () => {
   const { id } = useParams();
+  const [showDonationForm, setShowDonationForm] = useState(false);
   const donation = mockDonation; // Will fetch by id later
   
   const percentage = (donation.collected / donation.target) * 100;
@@ -202,7 +205,10 @@ const DonasiDetail = () => {
                   </div>
                 </div>
 
-                <Button className="w-full h-12 text-base bg-gradient-primary hover:opacity-90">
+                <Button 
+                  className="w-full h-12 text-base bg-gradient-primary hover:opacity-90"
+                  onClick={() => setShowDonationForm(true)}
+                >
                   <Heart className="h-5 w-5 mr-2 fill-current" />
                   Donasi Sekarang
                 </Button>
@@ -239,6 +245,14 @@ const DonasiDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Donation Form Modal */}
+      <DonationForm
+        open={showDonationForm}
+        onOpenChange={setShowDonationForm}
+        donationId={donation.id}
+        donationTitle={donation.title}
+      />
 
       {/* Footer */}
       <footer className="border-t border-border py-8">
