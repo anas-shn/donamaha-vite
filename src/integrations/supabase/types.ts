@@ -14,7 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      donations: {
+        Row: {
+          category: string | null
+          collected_amount: number
+          created_at: string
+          description: string | null
+          donor_count: number
+          end_date: string | null
+          id: string
+          image_url: string | null
+          is_active: boolean
+          organizer_id: string | null
+          organizer_name: string
+          target_amount: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          collected_amount?: number
+          created_at?: string
+          description?: string | null
+          donor_count?: number
+          end_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          organizer_id?: string | null
+          organizer_name: string
+          target_amount?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          collected_amount?: number
+          created_at?: string
+          description?: string | null
+          donor_count?: number
+          end_date?: string | null
+          id?: string
+          image_url?: string | null
+          is_active?: boolean
+          organizer_id?: string | null
+          organizer_name?: string
+          target_amount?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "donations_organizer_id_fkey"
+            columns: ["organizer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
