@@ -15,7 +15,8 @@ import {
   ChevronLeft,
   Shield,
   Clock,
-  MapPin
+  MapPin,
+  FileText
 } from "lucide-react";
 
 // Mock data - will be replaced with real data from Supabase
@@ -197,7 +198,16 @@ const DonasiDetail = () => {
 
             {/* Updates */}
             <Card className="p-6 border-border/40">
-              <h2 className="text-lg font-semibold mb-4 text-foreground">Update Terbaru</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-foreground">Update Terbaru</h2>
+                <Link
+                  to={`/donasi/${id}/report`}
+                  className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+                >
+                  <FileText className="h-4 w-4" />
+                  Lihat Laporan Lengkap
+                </Link>
+              </div>
               <div className="space-y-4">
                 {donation.updates.map((update, index) => (
                   <div key={index} className="border-l-2 border-primary/30 pl-4">
