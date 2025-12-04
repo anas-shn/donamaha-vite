@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import DonationForm from "@/components/DonationForm";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { 
   Heart, 
   Users, 
@@ -77,19 +78,48 @@ Jazakallahu Khairan Katsira.`,
   ],
 };
 
+const PRESET_AMOUNTS = [25000, 50000, 100000, 250000, 500000, 1000000];
+
 const DonasiDetail = () => {
   const { id } = useParams();
-  const [showDonationForm, setShowDonationForm] = useState(false);
-  const donation = mockDonation; // Will fetch by id later
+  const navigate = useNavigate();
+  const donation = mockDonation;
   
+  const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
+  const [customAmount, setCustomAmount] = useState("");
+  
+  const amount = selectedAmount || parseInt(customAmount) || 0;
   const percentage = (donation.collected / donation.target) * 100;
 
-  const formatCurrency = (amount: number) => {
+  const formatCurrency = (value: number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
       minimumFractionDigits: 0,
-    }).format(amount);
+    }).format(value);
+  };
+
+  const handleAmountSelect = (value: number) => {
+    setSelectedAmount(value);
+    setCustomAmount("");
+  };
+
+  const handleCustomAmountChange = (value: string) => {
+    const numericValue = value.replace(/\D/g, "");
+    setCustomAmount(numericValue);
+    setSelectedAmount(null);
+  };
+
+  const handleDonateClick = () => {
+    if (amount >= 10000) {
+      navigate("/payment", {
+        state: {
+          donationId: donation.id,
+          donationTitle: donation.title,
+          amount,
+        },
+      });
+    }
   };
 
   return (
@@ -205,9 +235,54 @@ const DonasiDetail = () => {
                   </div>
                 </div>
 
+                {/* Amount Selection */}
+                <div className="pt-4 border-t border-border space-y-4">
+                  <Label className="text-sm font-medium">Pilih Nominal Donasi</Label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {PRESET_AMOUNTS.map((preset) => (
+                      <Button
+                        key={preset}
+                        variant={selectedAmount === preset ? "default" : "outline"}
+                        className={`text-xs ${selectedAmount === preset ? "bg-gradient-primary" : ""}`}
+                        onClick={() => handleAmountSelect(preset)}
+                      >
+                        {formatCurrency(preset).replace("Rp", "").trim()}
+                      </Button>
+                    ))}
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="text-xs text-muted-foreground">Atau masukkan nominal lain</Label>
+                    <div className="relative">
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
+                        Rp
+                      </span>
+                      <Input
+                        type="text"
+                        placeholder="Minimal 10.000"
+                        value={customAmount ? parseInt(customAmount).toLocaleString("id-ID") : ""}
+                        onChange={(e) => handleCustomAmountChange(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                  </div>
+
+                  {amount > 0 && (
+                    <div className="p-3 bg-primary/5 rounded-lg">
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Nominal Donasi</span>
+                        <span className="text-lg font-bold text-primary">
+                          {formatCurrency(amount)}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 <Button 
                   className="w-full h-12 text-base bg-gradient-primary hover:opacity-90"
-                  onClick={() => setShowDonationForm(true)}
+                  onClick={handleDonateClick}
+                  disabled={amount < 10000}
                 >
                   <Heart className="h-5 w-5 mr-2 fill-current" />
                   Donasi Sekarang
@@ -245,14 +320,6 @@ const DonasiDetail = () => {
           </div>
         </div>
       </div>
-
-      {/* Donation Form Modal */}
-      <DonationForm
-        open={showDonationForm}
-        onOpenChange={setShowDonationForm}
-        donationId={donation.id}
-        donationTitle={donation.title}
-      />
 
       {/* Footer */}
       <footer className="border-t border-border py-8">
