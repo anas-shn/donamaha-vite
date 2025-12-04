@@ -103,6 +103,38 @@ export type Database = {
         }
         Relationships: []
       }
+      reports: {
+        Row: {
+          content: string | null
+          created_at: string
+          donation_id: string
+          id: string
+          image_url: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string
+          donation_id: string
+          id?: string
+          image_url?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string
+          donation_id?: string
+          id?: string
+          image_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       transactions: {
         Row: {
           amount: number
@@ -159,6 +191,41 @@ export type Database = {
             columns: ["donor_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteers: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          donation_id: string
+          id: string
+          name: string
+          role: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          donation_id: string
+          id?: string
+          name: string
+          role?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          donation_id?: string
+          id?: string
+          name?: string
+          role?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteers_donation_id_fkey"
+            columns: ["donation_id"]
+            isOneToOne: false
+            referencedRelation: "donations"
             referencedColumns: ["id"]
           },
         ]

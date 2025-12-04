@@ -8,6 +8,7 @@ import Donasi from "./pages/Donasi";
 import DonasiDetail from "./pages/DonasiDetail";
 import Payment from "./pages/Payment";
 import Riwayat from "./pages/Riwayat";
+import Report from "./pages/Report";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/donasi" element={<Donasi />} />
           <Route path="/donasi/:id" element={<DonasiDetail />} />
+          <Route path="/donasi/:id/report" element={<Report />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/riwayat" element={<Riwayat />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
