@@ -9,6 +9,7 @@ import DonasiDetail from "./pages/DonasiDetail";
 import Payment from "./pages/Payment";
 import Riwayat from "./pages/Riwayat";
 import Report from "./pages/Report";
+import ReportFeed from "./pages/ReportFeed";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/donasi/:id/report" element={<Report />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/riwayat" element={<Riwayat />} />
+          <Route path="/laporan" element={<ReportFeed />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

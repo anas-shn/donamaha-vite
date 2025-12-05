@@ -23,6 +23,9 @@ const Navbar = () => {
             <Link to="/donasi" className="text-foreground hover:text-primary transition-colors font-medium">
               Donasi
             </Link>
+            <Link to="/laporan" className="text-foreground hover:text-primary transition-colors font-medium">
+              Laporan
+            </Link>
             <Link to="/riwayat" className="text-foreground hover:text-primary transition-colors font-medium">
               Riwayat
             </Link>
