@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Calendar, Image as ImageIcon, ArrowRight, TrendingUp } from "lucide-react";
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
+import CreateReportForm from "@/components/CreateReportForm";
 
 interface ReportWithDonation {
   id: string;
@@ -62,11 +63,14 @@ const ReportFeed = () => {
 
       <main className="container mx-auto px-4 py-8 max-w-2xl">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Laporan Terbaru</h1>
-          <p className="text-muted-foreground">
-            Update terkini dari para penyelenggara kampanye donasi
-          </p>
+        <div className="mb-8 flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-3xl font-bold mb-2">Laporan Terbaru</h1>
+            <p className="text-muted-foreground">
+              Update terkini dari para penyelenggara kampanye donasi
+            </p>
+          </div>
+          <CreateReportForm />
         </div>
 
         {/* Feed */}
