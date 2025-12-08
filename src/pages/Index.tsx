@@ -1,9 +1,31 @@
 import Navbar from "@/components/Navbar";
 import DonationCard from "@/components/DonationCard";
 import { Button } from "@/components/ui/button";
-import { Heart, Users, Target, TrendingUp } from "lucide-react";
+import { Heart, Users, Target, TrendingUp, ArrowRight, Calendar } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  // Fetch recent reports
+  const { data: reports } = useQuery({
+    queryKey: ['recent-reports'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('reports')
+        .select(`
+          *,
+          donations (title, organizer_name)
+        `)
+        .order('created_at', { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      return data;
+    }
+  });
   // Mock data untuk donasi populer
   const popularDonations = [
     {
@@ -323,6 +345,111 @@ const Index = () => {
                 Daftar Sebagai Volunteer
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* News Section */}
+      <section className="py-24 bg-gradient-to-br from-muted/30 to-background">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
+            <div>
+              <span className="text-sm font-semibold text-primary uppercase tracking-wider">Berita Terbaru</span>
+              <h2 className="text-4xl md:text-5xl font-bold mt-3">
+                Kabar & <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Laporan</span>
+              </h2>
+              <p className="text-lg text-muted-foreground mt-2">
+                Update terbaru dari kampanye donasi yang sedang berjalan
+              </p>
+            </div>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-2 group self-start md:self-auto"
+              onClick={() => navigate('/laporan')}
+            >
+              Lihat Semua
+              <ArrowRight className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {reports && reports.length > 0 ? (
+              reports.map((report) => (
+                <article 
+                  key={report.id}
+                  className="group bg-card rounded-2xl overflow-hidden border border-border/40 shadow-elegant hover:shadow-hover transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  onClick={() => navigate('/laporan')}
+                >
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={report.image_url || "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&auto=format&fit=crop"} 
+                      alt={report.donations?.title || "Report"}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-6 space-y-3">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      {new Date(report.created_at).toLocaleDateString('id-ID', { 
+                        day: 'numeric', 
+                        month: 'long', 
+                        year: 'numeric' 
+                      })}
+                    </div>
+                    <h3 className="font-semibold text-lg line-clamp-2 group-hover:text-primary transition-colors">
+                      {report.donations?.title || "Laporan Kampanye"}
+                    </h3>
+                    <p className="text-muted-foreground text-sm line-clamp-2">
+                      {report.content || "Update terbaru dari kampanye donasi"}
+                    </p>
+                    <div className="pt-2">
+                      <span className="text-xs font-medium text-primary">
+                        {report.donations?.organizer_name || "Penyelenggara"}
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              ))
+            ) : (
+              // Placeholder cards when no reports
+              [1, 2, 3].map((i) => (
+                <article 
+                  key={i}
+                  className="group bg-card rounded-2xl overflow-hidden border border-border/40 shadow-elegant hover:shadow-hover transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                  onClick={() => navigate('/laporan')}
+                >
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={`https://images.unsplash.com/photo-${i === 1 ? '1559027615-cd4628902d4a' : i === 2 ? '1488521787991-ed7bbaae773c' : '1469571486292-0ba58a3f068b'}?w=600&auto=format&fit=crop`}
+                      alt="News"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-6 space-y-3">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      {new Date().toLocaleDateString('id-ID', { 
+                        day: 'numeric', 
+                        month: 'long', 
+                        year: 'numeric' 
+                      })}
+                    </div>
+                    <h3 className="font-semibold text-lg line-clamp-2 group-hover:text-primary transition-colors">
+                      Update Kampanye Donasi
+                    </h3>
+                    <p className="text-muted-foreground text-sm line-clamp-2">
+                      Laporan terbaru tentang penyaluran dana dan progress kampanye
+                    </p>
+                    <div className="pt-2">
+                      <span className="text-xs font-medium text-primary">
+                        Penyelenggara
+                      </span>
+                    </div>
+                  </div>
+                </article>
+              ))
+            )}
           </div>
         </div>
       </section>
