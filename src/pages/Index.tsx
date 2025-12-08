@@ -150,6 +150,197 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* About Us Section */}
+      <section className="py-24 bg-gradient-to-br from-secondary/20 via-background to-primary/5">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
+            {/* Image Grid */}
+            <div className="relative">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="rounded-3xl overflow-hidden shadow-elegant aspect-square">
+                    <img 
+                      src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&auto=format&fit=crop" 
+                      alt="Volunteer helping"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="rounded-3xl overflow-hidden shadow-elegant aspect-[4/3]">
+                    <img 
+                      src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=400&auto=format&fit=crop" 
+                      alt="Children receiving help"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-4 pt-8">
+                  <div className="rounded-3xl overflow-hidden shadow-elegant aspect-[4/3]">
+                    <img 
+                      src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=400&auto=format&fit=crop" 
+                      alt="Community support"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="rounded-3xl overflow-hidden shadow-elegant aspect-square">
+                    <img 
+                      src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=400&auto=format&fit=crop" 
+                      alt="Donation activity"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+              {/* Decorative circle */}
+              <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full border-4 border-primary/20 -z-10" />
+            </div>
+
+            {/* Content */}
+            <div className="space-y-8">
+              <div>
+                <span className="text-sm font-semibold text-primary uppercase tracking-wider">Tentang Kami</span>
+                <h2 className="text-4xl md:text-5xl font-bold mt-3 leading-tight">
+                  Membantu Sesama
+                  <br />
+                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                    Mahasiswa Indonesia
+                  </span>
+                </h2>
+              </div>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Doneasy adalah platform donasi yang menghubungkan mahasiswa untuk saling membantu. 
+                Kami percaya bahwa kebaikan sekecil apapun dapat membawa dampak besar bagi sesama.
+              </p>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Heart className="h-6 w-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Donasi</h3>
+                    <p className="text-muted-foreground">
+                      Berikan bantuan dalam bentuk dana untuk membantu sesama mahasiswa yang membutuhkan.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                    <Users className="h-6 w-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Volunteer</h3>
+                    <p className="text-muted-foreground">
+                      Kontribusikan waktu dan keahlianmu untuk membantu kampanye donasi berjalan dengan baik.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Join Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <span className="text-sm font-semibold text-primary uppercase tracking-wider">Bergabung Bersama Kami</span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-3">
+              Jadilah Bagian dari
+              <br />
+              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                Perubahan Positif
+              </span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4">
+              Pilih peranmu dan mulai berkontribusi untuk membantu sesama mahasiswa
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Organizer Card */}
+            <div className="group relative bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 border border-primary/20 hover:border-primary/40 transition-all duration-300 hover:shadow-elegant hover:-translate-y-1">
+              <div className="absolute top-6 right-6">
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Target className="h-8 w-8 text-primary" />
+                </div>
+              </div>
+              <div className="space-y-4 pr-20">
+                <h3 className="text-2xl font-bold">Jadi Penyelenggara</h3>
+                <p className="text-muted-foreground">
+                  Buat kampanye donasi untuk membantu mahasiswa atau organisasi kampus yang membutuhkan dana.
+                </p>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    Kelola kampanye donasi dengan mudah
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    Pantau progress pengumpulan dana
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    Buat laporan transparan untuk donatur
+                  </li>
+                </ul>
+              </div>
+              <Button className="mt-6 bg-gradient-primary hover:opacity-90">
+                Daftar Sebagai Penyelenggara
+              </Button>
+            </div>
+
+            {/* Volunteer Card */}
+            <div className="group relative bg-gradient-to-br from-accent/5 to-accent/10 rounded-3xl p-8 border border-accent/20 hover:border-accent/40 transition-all duration-300 hover:shadow-elegant hover:-translate-y-1">
+              <div className="absolute top-6 right-6">
+                <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Users className="h-8 w-8 text-accent" />
+                </div>
+              </div>
+              <div className="space-y-4 pr-20">
+                <h3 className="text-2xl font-bold">Jadi Volunteer</h3>
+                <p className="text-muted-foreground">
+                  Bantu kampanye donasi dengan waktu dan keahlianmu. Setiap kontribusi sangat berarti.
+                </p>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    Bergabung dengan tim volunteer kampanye
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    Bantu distribusi dan dokumentasi
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent" />
+                    Dapatkan pengalaman sosial berharga
+                  </li>
+                </ul>
+              </div>
+              <Button variant="outline" className="mt-6 border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground">
+                Daftar Sebagai Volunteer
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer CTA */}
+      <section className="py-20 bg-gradient-to-r from-primary via-accent to-primary">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+            Siap Membuat Perubahan?
+          </h2>
+          <p className="text-lg text-primary-foreground/80 max-w-xl mx-auto mb-8">
+            Bergabung dengan ribuan mahasiswa lainnya yang sudah berkontribusi melalui doneasy.
+          </p>
+          <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
+            Mulai Sekarang
+          </Button>
+        </div>
+      </section>
     </div>
   );
 };
