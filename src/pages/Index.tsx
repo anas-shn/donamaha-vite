@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import DonationCard from "@/components/DonationCard";
 import { Button } from "@/components/ui/button";
 import { Heart, Users, Target, TrendingUp, ArrowRight, Calendar } from "lucide-react";
@@ -468,6 +469,9 @@ const Index = () => {
           </Button>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
